@@ -1,0 +1,38 @@
+ <ion-header>
+
+    <ion-navbar>
+      <div>
+        <h5 class="font_0"
+          style="text-align:center;font-size:15px;color: black;  display: flex;justify-content: center;align-items: center; ">
+          <span style="font-size:15px"><span style="font-family:stencil-w01-bold,fantasy;"><a
+                style="color: white;" *ngIf="role != 'Empleado'">Empleados registrados</a></span></span>
+                <span style="font-size:15px"><span style="font-family:stencil-w01-bold,fantasy;"><a
+                  style="color: white;" *ngIf="role == 'Empleado'">INFORME TECNICO MANTENCIÓN PREVENTIVA</a></span></span></h5>
+      </div>
+      <ion-buttons end>
+        <button ion-button icon-only menuToggle style="    border: solid 1px;color: white;padding: 5px;">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+      <ion-card>
+          <div class="form" padding-left padding-right style="padding-top:20% !important;">
+            <ion-list>
+                <ion-item-sliding #slidingItem *ngFor="let item of form; let i=index">
+              <ion-item (click)="showInform(item)">
+                <ion-label>INFORME</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" placeholder={{item.fecha}} disabled></ion-datetime>
+              </ion-item>
+              <ion-item-options>
+                  <button ion-button (click)="AlertDelete(item)" icon-only round>
+                    <ion-icon name="trash"></ion-icon>
+                  </button>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </div>
+     
+        </ion-card>
+  </ion-content>

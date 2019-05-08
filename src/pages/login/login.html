@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar text-center>
+    <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form padding>
+    <ion-list>
+
+      <ion-item style="border: 0.55px solid #c8c7cc;border-radius: 30px;">
+        <ion-label fixed>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
+      </ion-item>
+
+
+      <ion-item style="border: 0.55px solid #c8c7cc;border-radius: 30px;" margin-top>
+        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+      </ion-item>
+
+      <div padding>
+        <button ion-button color="primary" block (click)="doLogin()">{{ 'LOGIN_BUTTON' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form>
+</ion-content>

@@ -1,0 +1,46 @@
+page-welcome {
+  .splash-bg {
+    position: relative;
+    background: url('https://static.wixstatic.com/media/2a5c3fa72d4c6e60b15b67007d06c499.jpg/v1/fill/w_956,h_300,al_c,q_80,usm_0.66_1.00_0.01/2a5c3fa72d4c6e60b15b67007d06c499.jpg') no-repeat transparent;
+    background-size: cover;
+    height: 45%;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: animatedBackground 40s linear infinite;
+  }
+
+  @keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+  }
+
+  .splash-info {
+    position: relative;
+    z-index: 2;
+    margin-top: -64px;
+    text-align: center;
+  }
+  .splash-logo {
+    margin: auto;
+    background: url('http://www.hroman.cl/wp-content/uploads/2016/12/logo.png') no-repeat transparent;
+    background-size: 100%;
+    width: 300px;
+    height: 134px;
+  }
+  .splash-intro {
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 80%;
+    margin: auto;
+  }
+  button.login {
+    margin-top: 25px;
+    background-color: white;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    color: #333;
+
+    &.activated {
+      background-color: rgb(220, 220, 220);
+    }
+  }
+}

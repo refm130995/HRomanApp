@@ -1,0 +1,53 @@
+<ion-menu [content]="content" id="authenticated">
+  <ion-header>
+    <ion-toolbar>
+        <ion-list>
+            <ion-item>
+                <ion-avatar item-start style="border: solid 1px white !important;border-radius: 50%;padding: 5px;">
+                    <img src="https://static.wixstatic.com/media/a9ff3b_bcb22b9fe58d4cbe8b2bfd13e1ac3ff5.png/v1/fill/w_105,h_105,al_c,lg_1,q_80/a9ff3b_bcb22b9fe58d4cbe8b2bfd13e1ac3ff5.webp">
+                </ion-avatar>
+                <h2>Bienvenido
+                    <ion-icon name="ios-arrow-forward"></ion-icon>
+                </h2>
+            </ion-item>
+        </ion-list>
+    </ion-toolbar>
+    <div class="menu-tabs" padding text-center>
+        <div class="menu-title">
+            <ion-list>
+                <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)" style="padding: 5px;border-top: solid 1px white !important;border-bottom: solid 1px white !important;">
+                    <ion-icon name="{{p.icon}}" class="notifications-icon"></ion-icon>{{p.title}}
+                </button>
+            </ion-list>
+        </div>
+    </div>
+</ion-header>
+    
+      </ion-menu>
+      <ion-menu [content]="content" id="unauthenticated">
+            <ion-header>
+              <ion-toolbar>
+                  <ion-list>
+                      <ion-item>
+                          <ion-avatar item-start style="border: solid 1px white !important;border-radius: 50%;padding: 5px;">
+                              <img src="https://static.wixstatic.com/media/a9ff3b_bcb22b9fe58d4cbe8b2bfd13e1ac3ff5.png/v1/fill/w_105,h_105,al_c,lg_1,q_80/a9ff3b_bcb22b9fe58d4cbe8b2bfd13e1ac3ff5.webp">
+                          </ion-avatar>
+                          <h2>Bienvenido
+                              <ion-icon name="ios-arrow-forward"></ion-icon>
+                          </h2>
+                      </ion-item>
+                  </ion-list>
+              </ion-toolbar>
+              <div class="menu-tabs" padding text-center>
+                  <div class="menu-title">
+                      <ion-list>
+                          <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)" style="padding: 5px;border-top: solid 1px white !important;border-bottom: solid 1px white !important;">
+                              <ion-icon name="{{p.icon}}" class="notifications-icon"></ion-icon>{{p.title}}
+                          </button>
+                      </ion-list>
+                  </div>
+              </div>
+          </ion-header>
+              
+                </ion-menu>
+      <ion-nav #content [root]="rootPage" swipeBackEnabled="false " type="overlay"></ion-nav>

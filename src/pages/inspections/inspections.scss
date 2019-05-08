@@ -1,0 +1,13 @@
+page-inspections {
+    .text-input[disabled]{
+        opacity: 1;
+        color:black;
+    }
+    .form ion-list .item-inner{
+        border:1px solid black !important;
+    }
+    .form ion-list ion-item .label, .form ion-list .item-inner .label{
+        color: black !important;
+        opacity: 1 !important;
+    }
+}
