@@ -1,16 +1,33 @@
 <ion-header>
-
   <ion-navbar>
     <div>
-      <h5 class="font_0"
-        style="text-align:center;font-size:15px;color: black;  display: flex;justify-content: center;align-items: center; ">
-        <span style="font-size:15px"><span style="font-family:stencil-w01-bold,fantasy;"><a
-              style="color: white;" *ngIf="role != 'Empleado'">Empleados registrados</a></span></span>
-              <span style="font-size:15px"><span style="font-family:stencil-w01-bold,fantasy;"><a
-                style="color: white;" *ngIf="role == 'Empleado'">INFORME TECNICO MANTENCIÓN PREVENTIVA</a></span></span></h5>
+      <h5
+        class="font_0"
+        style="text-align:center;font-size:15px;color: black;  display: flex;justify-content: center;align-items: center; "
+      >
+        <span style="font-size:15px"
+          ><span style="font-family:stencil-w01-bold,fantasy;"
+            ><a style="color: white;" *ngIf="role != 'Empleado'"
+              >Empleados registrados</a
+            ></span
+          ></span
+        >
+        <span style="font-size:15px"
+          ><span style="font-family:stencil-w01-bold,fantasy;"
+            ><a style="color: white;" *ngIf="role == 'Empleado'"
+              >INFORME TECNICO MANTENCIÓN PREVENTIVA</a
+            ></span
+          ></span
+        >
+      </h5>
     </div>
     <ion-buttons end>
-      <button ion-button icon-only menuToggle style="    border: solid 1px;color: white;padding: 5px;">
+      <button
+        ion-button
+        icon-only
+        menuToggle
+        style="    border: solid 1px;color: white;padding: 5px;"
+      >
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
@@ -18,47 +35,92 @@
 </ion-header>
 <ion-content *ngIf="role == 'Empleado'">
   <ion-card>
-    <div class="form" padding-left padding-right style="padding-top:20% !important;">
+    <div
+      class="form"
+      padding-left
+      padding-right
+      style="padding-top:20% !important;"
+    >
       <ion-list>
         <ion-item>
           <ion-label>Fecha</ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="form.fecha"></ion-datetime>
+          <ion-datetime
+            displayFormat="MM/DD/YYYY"
+            [(ngModel)]="form.fecha"
+          ></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label>Nombre del ejecutor</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.nombre_del_ejecutor"></ion-input>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.nombre_del_ejecutor"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Lugar de trabajo</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.lugar_de_trabajo"></ion-input>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.lugar_de_trabajo"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Nombre del Operador/Conductor</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.nombre_del_operador"></ion-input>
+          <ion-select text-right [(ngModel)]="form.nombre_del_operador">
+            <ion-option *ngFor="let chofer of choferes">{{
+              chofer.nombre + ' ' + chofer.apellido
+            }}</ion-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>Equipo/Camion</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.equipo_camion"></ion-input>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.equipo_camion"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Modelo</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.modelo"></ion-input>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.modelo"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Patente</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.patente"></ion-input>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.patente"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Tipo de mantención</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.tipo_mantencion"></ion-input>
+          <ion-select text-right [(ngModel)]="form.tipo_mantencion">
+            <ion-option value="Camión">Camión</ion-option>
+            <ion-option value="Máquina">Máquina</ion-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>Horometro programado</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.horometro_programado"></ion-input>
+          <ion-input
+            type="tel"
+            text-right
+            [(ngModel)]="form.horometro_programado"
+            (ngModelChange)="calculate_mantencion()"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Horometro real</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.horometro_real"></ion-input>
+          <ion-input
+            type="tel"
+            text-right
+            [(ngModel)]="form.horometro_real"
+            (ngModelChange)="calculate_mantencion()"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Km</ion-label>
@@ -66,11 +128,19 @@
         </ion-item>
         <ion-item>
           <ion-label>Mantención dentro de + - 50hrs.</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.mantencion_dentro_mm50h"></ion-input>
+          <ion-input
+            type="text"
+            readonly
+            text-right
+            [(ngModel)]="form.mantencion_dentro_mm50h"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Mantención completa</ion-label>
-          <ion-input type="text" text-right [(ngModel)]="form.mantencion_completa"></ion-input>
+          <ion-select text-right [(ngModel)]="form.mantencion_completa"
+            ><ion-option value="Sí">Sí</ion-option>
+            <ion-option value="No">No</ion-option>
+          </ion-select>
         </ion-item>
       </ion-list>
       <ion-list>
@@ -83,150 +153,255 @@
           <ion-row>
             <ion-item>
               <ion-label stacked>MOTOR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('MOTOR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('MOTOR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>CAJA CAMBIO</ion-label>
-              <ion-toggle checked="false"  (ionChange)="check_('CAJA CAMBIO')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('CAJA CAMBIO')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>DIFERENCIAL</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('DIFERENCIAL')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('DIFERENCIAL')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>HIDRAULICO (4/01/10) 6205 HR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('HIDRAULICO (4/01/10) 6205 HR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('HIDRAULICO (4/01/10) 6205 HR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>REDUCTOR DE VELOCIDAD</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('REDUCTOR DE VELOCIDAD')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('REDUCTOR DE VELOCIDAD')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>TRANSMISION (4/01/10) 6205 HR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('TRANSMISION (4/01/10) 6205 HR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('TRANSMISION (4/01/10) 6205 HR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>TANDEM</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('TANDEM')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('TANDEM')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>MOTOR DE GIRO</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('MOTOR DE GIRO')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('MOTOR DE GIRO')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>MANDOS FINALES</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('MANDOS FINALES')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('MANDOS FINALES')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>PLANETARIO TAMBOR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('PLANETARIO TAMBOR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('PLANETARIO TAMBOR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>CAJA PESAS EXCENTRICAS</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('CAJA PESAS EXCENTRICAS')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('CAJA PESAS EXCENTRICAS')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>CAJAS SOPORTE VIBRATORIO</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('CAJAS SOPORTE VIBRATORIO')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('CAJAS SOPORTE VIBRATORIO')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>TORNAMESA</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('TORNAMESA')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('TORNAMESA')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>MOTOR TRASLACION</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('MOTOR TRASLACION')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('MOTOR TRASLACION')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>SISTEMA DE LEVANTE</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('SISTEMA DE LEVANTE')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('SISTEMA DE LEVANTE')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>SISTEMA DE DIRECCIÓN</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('SISTEMA DE DIRECCIÓN')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('SISTEMA DE DIRECCIÓN')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>RETARDADOR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('RETARDADOR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('RETARDADOR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>CUBOS REDUCTORES</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('CUBOS REDUCTORES')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('CUBOS REDUCTORES')"
+              ></ion-toggle>
             </ion-item>
           </ion-row>
           <ion-row>
-    <!--         <ion-col col-12 text-center>
+            <!--         <ion-col col-12 text-center>
               <b>ACEITES</b>
             </ion-col> -->
           </ion-row>
           <ion-row>
             <ion-item>
               <ion-label stacked>10W</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('10W')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('10W')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>80W</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('80W')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('80W')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>90W</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('90W')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('90W')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>10W40</ion-label>
-              <ion-toggle checked="false"  (ionChange)="check_('10W40')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('10W40')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>15W40</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('15W40')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('15W40')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>25W60</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('25W60')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('25W60')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>80W90</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('80W90')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('80W90')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>85W140</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('85W140')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('85W140')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>HD30</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('HD30')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('HD30')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>HD50</ion-label>
-              <ion-toggle checked="false"  (ionChange)="check_('HD50')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('HD50')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>MOVIL 424</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('MOVIL 424')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('MOVIL 424')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>SHC 630</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('SHC 630')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('SHC 630')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>68</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('68')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('68')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>25W50</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('25W50')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('25W50')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>REFRIGERANTE</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('REFRIGERANTE')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('REFRIGERANTE')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>H2O DESTILADA</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('H2O DESTILADA')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('H2O DESTILADA')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>ATF</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_('ATF')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_('ATF')"
+              ></ion-toggle>
             </ion-item>
           </ion-row>
         </ion-grid>
@@ -239,136 +414,242 @@
           <ion-row>
             <ion-item>
               <ion-label stacked>AIRE1</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('AIRE1')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('AIRE1')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>AIRE2</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('AIRE2')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('AIRE2')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>CABINA</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('CABINA')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('CABINA')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>MOTOR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('MOTOR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('MOTOR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>HIDRAULICO</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('HIDRAULICO')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('HIDRAULICO')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>HIDRAULICO PILOT</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('HIDRAULICO PILOT')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('HIDRAULICO PILOT')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>TRANSMISION</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('TRANSMISION')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('TRANSMISION')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>ACEITE</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('ACEITE')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('ACEITE')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>PETROLEO</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('PETROLEO')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('PETROLEO')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>PETROLEO2</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('PETROLEO2')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('PETROLEO2')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>DECANTADOR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('DECANTADOR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('DECANTADOR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>DIRECCIÓN</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('DIRECCIÓN')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('DIRECCIÓN')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>RETARDADOR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('RETARDADOR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('RETARDADOR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>SECADOR DE AIRE</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('SECADOR DE AIRE')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('SECADOR DE AIRE')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>SEPARADOR RACOR</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('SEPARADOR RACOR')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('SEPARADOR RACOR')"
+              ></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label stacked>REFRIGERANTE</ion-label>
-              <ion-toggle checked="false" (ionChange)="check_2('REFRIGERANTE')"></ion-toggle>
+              <ion-toggle
+                checked="false"
+                (ionChange)="check_2('REFRIGERANTE')"
+              ></ion-toggle>
             </ion-item>
           </ion-row>
         </ion-grid>
       </ion-list>
     </div>
-  
-      <ion-row>
-        <ion-col col-6 text-center style="    border: solid 1px;">
-          <b>Elementos de desgaste cambiados</b>
-        </ion-col>
-        <ion-col col-6 text-center style="    border: solid 1px;">
-          <b> Cantidad</b></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-8 text-center>
-          <ion-input type="text" placeholder="Elemento" [(ngModel)]="form.elemntos_de_desgaste_cambiados[0].descripcion"></ion-input>
-        </ion-col>
-        <ion-col col-4 text-center>
-          <ion-input type="tel" placeholder="Cantidad" [(ngModel)]="form.elemntos_de_desgaste_cambiados[0].cantidad"></ion-input>
-        </ion-col>
-        <ion-col col-8 text-center>
-          <ion-input type="text" placeholder="Elemento" [(ngModel)]="form.elemntos_de_desgaste_cambiados[1].descripcion"></ion-input>
-        </ion-col>
-        <ion-col col-4 text-center>
-          <ion-input type="tel" placeholder="Cantidad"[(ngModel)]="form.elemntos_de_desgaste_cambiados[1].cantidad"></ion-input>
-        </ion-col>
-        <ion-col col-8 text-center>
-          <ion-input type="text" placeholder="Elemento" [(ngModel)]="form.elemntos_de_desgaste_cambiados[2].descripcion"></ion-input>
-        </ion-col>
-        <ion-col col-4 text-center>
-          <ion-input type="tel" placeholder="Cantidad" [(ngModel)]="form.elemntos_de_desgaste_cambiados[2].cantidad"></ion-input>
-        </ion-col>
-        <ion-col col-8 text-center>
-          <ion-input type="text" placeholder="Elemento" [(ngModel)]="form.elemntos_de_desgaste_cambiados[3].descripcion"></ion-input>
-        </ion-col>
-        <ion-col col-4 text-center>
-          <ion-input type="tel" placeholder="Cantidad" [(ngModel)]="form.elemntos_de_desgaste_cambiados[3].cantidad"></ion-input>
-        </ion-col>
-        <ion-col col-8 text-center>
-          <ion-input type="text" placeholder="Elemento" [(ngModel)]="form.elemntos_de_desgaste_cambiados[4].descripcion"></ion-input>
-        </ion-col>
-        
-        <ion-col col-4 text-center>
-          <ion-input type="tel" placeholder="Cantidad" [(ngModel)]="form.elemntos_de_desgaste_cambiados[4].cantidad"></ion-input>
-        </ion-col>
 
-      </ion-row>
-      <ion-row>
-        <ion-col col-12 text-center>
-          <button ion-button full block (click)="next()" padding> Siguiente</button>
-        </ion-col>
-      </ion-row>
-   <!--  </ion-grid> -->
+    <ion-row>
+      <ion-col col-6 text-center style="    border: solid 1px;">
+        <b>Elementos de desgaste cambiados</b>
+      </ion-col>
+      <ion-col col-6 text-center style="    border: solid 1px;">
+        <b> Cantidad</b></ion-col
+      >
+    </ion-row>
+    <ion-row>
+      <ion-col col-8 text-center>
+        <ion-input
+          type="text"
+          placeholder="Elemento"
+          readonly
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[0].descripcion"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <ion-input
+          type="tel"
+          placeholder="Cantidad"
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[0].cantidad"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-8 text-center>
+        <ion-input
+          type="text"
+          placeholder="Elemento"
+          readonly
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[1].descripcion"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <ion-input
+          type="tel"
+          placeholder="Cantidad"
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[1].cantidad"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-8 text-center>
+        <ion-input
+          type="text"
+          placeholder="Elemento"
+          readonly
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[2].descripcion"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <ion-input
+          type="tel"
+          placeholder="Cantidad"
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[2].cantidad"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-8 text-center>
+        <ion-input
+          type="text"
+          placeholder="Elemento"
+          readonly
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[3].descripcion"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <ion-input
+          type="tel"
+          placeholder="Cantidad"
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[3].cantidad"
+        ></ion-input>
+      </ion-col>
+      <ion-col col-8 text-center>
+        <ion-input
+          type="text"
+          placeholder="Elemento"
+          readonly
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[4].descripcion"
+        ></ion-input>
+      </ion-col>
+
+      <ion-col col-4 text-center>
+        <ion-input
+          type="tel"
+          placeholder="Cantidad"
+          [(ngModel)]="form.elemntos_de_desgaste_cambiados[4].cantidad"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 text-center>
+        <button ion-button full block (click)="next()" padding>
+          Siguiente
+        </button>
+      </ion-col>
+    </ion-row>
+    <!--  </ion-grid> -->
   </ion-card>
 </ion-content>
 <ion-content *ngIf="role != 'Empleado'">
-    <ion-list padding>
-            <ion-item-sliding #slidingItem *ngFor="let item of users" >
-  <ion-item (click)="showInform(item)">
-    <img item-start class="comerce-img" width="100" src="./assets/imgs/person.png">
-    <h2 style="color: #343995;"><b> {{item.firstname}} {{item.lastname}}</b></h2>
-    <p> <b> {{item.role}} </b></p>
-    <p> <b> {{item.email}} </b></p>
-  </ion-item>
-  <ion-item-options>
-      <button ion-button (click)="AlertDelete(item)" icon-only round>
-        <ion-icon name="trash"></ion-icon>
-      </button>
-    </ion-item-options>
-	</ion-item-sliding>
-</ion-list>
+  <ion-list padding>
+    <ion-item-sliding #slidingItem *ngFor="let item of users">
+      <ion-item (click)="showInform(item)">
+        <img
+          item-start
+          class="comerce-img"
+          width="100"
+          src="./assets/imgs/person.png"
+        />
+        <h2 style="color: #343995;">
+          <b> {{ item.firstname }} {{ item.lastname }}</b>
+        </h2>
+        <p>
+          <b> {{ item.role }} </b>
+        </p>
+        <p>
+          <b> {{ item.email }} </b>
+        </p>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button (click)="AlertDelete(item)" icon-only round>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

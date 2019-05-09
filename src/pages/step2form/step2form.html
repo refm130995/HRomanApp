@@ -1,81 +1,162 @@
 <ion-header>
-
-    <ion-navbar>
-      <div>
-        <h5 class="font_0"
-          style="text-align:center;font-size:15px;color: black;  display: flex;justify-content: center;align-items: center; ">
-          <span style="font-size:15px"><span style="font-family:stencil-w01-bold,fantasy;"><a
-                style="color: white;">INFORME TECNICO MANTENCIÓN PREVENTIVA</a></span></span></h5>
-      </div>
-      <ion-buttons end>
-        <button ion-button icon-only menuToggle style="    border: solid 1px;color: white;padding: 5px;">
-          <ion-icon name="menu"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <div>
+      <h5
+        class="font_0"
+        style="text-align:center;font-size:15px;color: black;  display: flex;justify-content: center;align-items: center; "
+      >
+        <span style="font-size:15px"
+          ><span style="font-family:stencil-w01-bold,fantasy;"
+            ><a style="color: white;"
+              >INFORME TECNICO MANTENCIÓN PREVENTIVA</a
+            ></span
+          ></span
+        >
+      </h5>
+    </div>
+    <ion-buttons end>
+      <button
+        ion-button
+        icon-only
+        menuToggle
+        style="    border: solid 1px;color: white;padding: 5px;"
+      >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
   <div (click)="pickPhoto()">
-
-    <img *ngIf="!base64Image" class="camera" src="./assets/imgs/camera.png" alt="" width="200">
-    <img *ngIf="base64Image" class="camera" src="{{base64Image}}" alt="" width="200">
+    <img
+      *ngIf="!base64Image"
+      class="camera"
+      src="./assets/imgs/camera.png"
+      alt=""
+      width="200"
+    />
+    <img
+      *ngIf="base64Image"
+      class="camera"
+      src="{{ base64Image }}"
+      alt=""
+      width="200"
+    />
   </div>
   <ion-card>
-      <div class="form" padding-left padding-right style="padding-top: 20%;">
-        <ion-list>
-            <ion-item>
-                <ion-label stacked style="white-space: normal;">
-                  <b> <span> Descripcion de los trabajos realizados (Testeo, prueba, ajuste, calibración u otro)</span></b></ion-label>
-                <ion-textarea style="border: solid 1px black;padding:5px;" rows="6" cols="20" [(ngModel)]="form.descripcion_del_trabajo" placeholder=" Descripcion de los trabajos realizados..."></ion-textarea>
-              </ion-item>
-            <ion-item >
-                <ion-label>HORA INICIO</ion-label>
-                <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH:mm:ss" [(ngModel)]="form.hora_icinio"></ion-datetime>
-              </ion-item>
-              <ion-item >
-                  <ion-label>HORA TERMINO</ion-label>
-                  <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH:mm:ss" [(ngModel)]="form.hora_termino"></ion-datetime>
-                </ion-item>
-          <ion-item>
-            <ion-label>TOTAL HORAS</ion-label>
-            <ion-input type="text" text-right [(ngModel)]="form.total_horas"></ion-input>
-          </ion-item>
-          <ion-item >
-              <ion-label>TIEMPO DE TRASLADO</ion-label>
-              <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH:mm:ss" [(ngModel)]="form.tiempo_de_traslado"></ion-datetime>
-            </ion-item>
-            <ion-item>
-                <ion-label stacked>TIEMPO DE ADQUISICION DE REPUESTOS</ion-label>
-                <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM/DD/YYYY" [(ngModel)]="form.tiempo_add_repuestos" text-center></ion-datetime>
-              </ion-item>
-              <ion-item>
-                  <ion-label>SERVICIOS EXTERNOS</ion-label>
-                  <ion-input type="text" text-right [(ngModel)]="form.servicios_externos"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>SIN PERSONAL DISPONIBLE</ion-label>
-                    <ion-toggle [(ngModel)]="form.sin_personal_disp"></ion-toggle>
-                  </ion-item>
-                  <ion-item no-padding>
-                      <ion-textarea style="border: solid 1px black;padding:5px;" rows="6" cols="20" placeholder=" OBSERVACIONES..." [(ngModel)]="form.observaciones"></ion-textarea>
-                    </ion-item>
-                      <ion-item>
-                          <ion-label>Descripcion</ion-label>
-                          <ion-input  type="text"  placeholder="Incorporación al sistema documentado..." disabled></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Fecha de Aprobacion</ion-label>
-                            <ion-input  type="text"  placeholder="03/06/2013" disabled></ion-input>
-                          </ion-item>
-                          <ion-item>
-                              <ion-label>Elabora y Aprueba</ion-label>
-                              <ion-input  type="text"  placeholder="Mauricio Mendez/Héctor Román" disabled></ion-input>
-                            </ion-item>
-         </ion-list>
-        </div>
-    </ion-card>
-    <div padding>
-        <button ion-button color="primary" block (click)="save()">Guardar</button>
-      </div>
+    <div class="form" padding-left padding-right style="padding-top: 20%;">
+      <ion-list>
+        <ion-item>
+          <ion-label stacked style="white-space: normal;">
+            <b>
+              <span>
+                Descripcion de los trabajos realizados (Testeo, prueba, ajuste,
+                calibración u otro)</span
+              ></b
+            ></ion-label
+          >
+          <ion-textarea
+            style="border: solid 1px black;padding:5px;"
+            rows="6"
+            cols="20"
+            [(ngModel)]="form.descripcion_del_trabajo"
+            placeholder=" Descripcion de los trabajos realizados..."
+          ></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>HORA INICIO</ion-label>
+          <ion-datetime
+            displayFormat="HH:mm"
+            pickerFormat="HH:mm"
+            [(ngModel)]="form.hora_icinio"
+            (ngModelChange)="calculate()"
+          ></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>HORA TERMINO</ion-label>
+          <ion-datetime
+            displayFormat="HH:mm"
+            pickerFormat="HH:mm"
+            [(ngModel)]="form.hora_termino"
+            (ngModelChange)="calculate()"
+          ></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>TOTAL HORAS MANO OBRA (HH)</ion-label>
+          <ion-input
+            type="text"
+            text-right
+            readonly
+            [(ngModel)]="form.total_horas"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>TIEMPO DE TRASLADO</ion-label>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.tiempo_de_traslado"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>TIEMPO DE ADQUISICION DE REPUESTOS</ion-label>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.tiempo_add_repuestos"
+            text-center
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>SERVICIOS EXTERNOS</ion-label>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.servicios_externos"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>SIN PERSONAL DISPONIBLE</ion-label>
+          <ion-input
+            type="text"
+            text-right
+            [(ngModel)]="form.sin_personal_disp"
+          ></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-textarea
+            style="border: solid 1px black;padding:5px;"
+            rows="6"
+            cols="20"
+            placeholder=" OBSERVACIONES..."
+            [(ngModel)]="form.observaciones"
+          ></ion-textarea>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label>Descripcion</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Incorporación al sistema documentado..."
+            disabled
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Fecha de Aprobacion</ion-label>
+          <ion-input type="text" placeholder="03/06/2013" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Elabora y Aprueba</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Mauricio Mendez/Héctor Román"
+            disabled
+          ></ion-input>
+        </ion-item> -->
+      </ion-list>
+    </div>
+  </ion-card>
+  <div padding>
+    <button ion-button color="primary" block (click)="save()">Guardar</button>
+  </div>
 </ion-content>
